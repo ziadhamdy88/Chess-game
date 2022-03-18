@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Chess project1.jnlp">
+  <information>
+    <title>Chess project1</title>
+    <vendor>ZIAD</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="chess.project1.ChessProject1"  name="Chess project1" />
+  <update check="always"/>
+</jnlp>

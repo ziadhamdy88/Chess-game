@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Chess project1">
+  <ClassDiagramComponents>
+    <Class name="Board" package="chess.project1.Board" visibility="public" xPosition="1343.0" yPosition="20.0">
+      <Fields>
+        <Field name="gameBoard" type="List&lt;Tile&gt;" visibility="private" isFinal="true"/>
+        <Field name="whitePieces" type="Collection&lt;Piece&gt;" visibility="private" isFinal="true"/>
+        <Field name="blackPieces" type="Collection&lt;Piece&gt;" visibility="private" isFinal="true"/>
+        <Field name="whitePlayer" type="WhitePlayer" visibility="private" isFinal="true"/>
+        <Field name="blackPlayer" type="BlackPlayer" visibility="private" isFinal="true"/>
+        <Field name="currentPlayer" type="Player" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Builder" name="builder"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="calculateLegalMoves" returnType="Collection&lt;Move&gt;" visibility="private">
+          <Argument type="Collection&lt;Piece&gt;" name="pieces"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="whitePlayer" returnType="Player" visibility="public"/>
+        <Method name="blackPlayer" returnType="Player" visibility="public"/>
+        <Method name="currentPlayer" returnType="Player" visibility="public"/>
+        <Method name="getBlackPieces" returnType="Collection&lt;Piece&gt;" visibility="public"/>
+        <Method name="getWhitePieces" returnType="Collection&lt;Piece&gt;" visibility="public"/>
+        <Method name="calculateActivePieces" returnType="Collection&lt;Piece&gt;" visibility="private" isStatic="true">
+          <Argument type="List&lt;Tile&gt;" name="gameBoard"/>
+          <Argument type="Alliance" name="alliance"/>
+        </Method>
+        <Method name="getTile" returnType="Tile" visibility="public">
+          <Argument type="int" name="tileCoordinate"/>
+        </Method>
+        <Method name="createGameBoard" returnType="List&lt;Tile&gt;" visibility="private" isStatic="true">
+          <Argument type="Builder" name="builder"/>
+        </Method>
+        <Method name="createStandardBoard" returnType="Board" visibility="public" isStatic="true"/>
+      </Methods>
+    </Class>
+    <Class name="Move" package="chess.project1.Board" visibility="public" isAbstract="true" xPosition="926.0" yPosition="399.0">
+      <Fields>
+        <Field name="board" type="Board" visibility="package" isFinal="true"/>
+        <Field name="movingPiece" type="Piece" visibility="package" isFinal="true"/>
+        <Field name="destination" type="int" visibility="package" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private">
+          <Argument type="Board" name="board"/>
+          <Argument type="Piece" name="movingPiece"/>
+          <Argument type="int" name="destination"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getCurrentCoordinate" returnType="int" visibility="public"/>
+        <Method name="getDestination" returnType="int" visibility="public"/>
+        <Method name="isAttack" returnType="boolean" visibility="public"/>
+        <Method name="isCastlingMove" returnType="boolean" visibility="public"/>
+        <Method name="getAttackedPiece" returnType="Piece" visibility="public"/>
+        <Method name="getMovingPiece" returnType="Piece" visibility="public"/>
+        <Method name="execute" returnType="Board" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Tile" package="chess.project1.Board" visibility="public" isAbstract="true" xPosition="728.0" yPosition="20.0">
+      <Fields>
+        <Field name="TileCoordinate" type="int" visibility="protected" isFinal="true"/>
+        <Field name="EMPTY_TILES_CACHE" type="Map&lt;Integer, EmptyTile&gt;" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private">
+          <Argument type="int" name="TileCoordinate"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="createAllPossibleEmptyTiles" returnType="Map&lt;Integer, EmptyTile&gt;" visibility="private" isStatic="true" isFinal="true"/>
+        <Method name="createTile" returnType="Tile" visibility="public" isStatic="true">
+          <Argument type="int" name="TileCoordinate"/>
+          <Argument type="Piece" name="p"/>
+        </Method>
+        <Method name="getTileCoordinate" returnType="int" visibility="public"/>
+        <Method name="isTileOccupied" returnType="boolean" visibility="public" isAbstract="true"/>
+        <Method name="getPiece" returnType="Piece" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Class>
+    <Class name="ChessProject1" package="chess.project1" visibility="public" xPosition="1452.0" yPosition="481.0">
+      <Fields>
+        <Field name="root" type="GridPane" visibility="package" isStatic="true"/>
+        <Field name="square" type="StackPane" visibility="package" isStatic="true"/>
+        <Field name="board" type="Board" visibility="package" isStatic="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="basicBoard" returnType="void" visibility="public">
+          <Argument type="GridPane" name="root"/>
+          <Argument type="StackPane" name="square"/>
+        </Method>
+        <Method name="start" returnType="void" visibility="public">
+          <Argument type="Stage" name="primaryStage"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FXMLDocumentController" package="chess.project1" visibility="public" xPosition="-11.0" yPosition="128.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="url"/>
+          <Argument type="ResourceBundle" name="rb"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Bishop" package="chess.project1.Pieces" visibility="public" xPosition="1578.0" yPosition="694.0">
+      <Fields>
+        <Field name="allPossibleMoves" type="int[]" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Alliance" name="alliance"/>
+          <Argument type="int" name="position"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="calculatePossibleMoves" returnType="Collection&lt;Move&gt;" visibility="public">
+          <Argument type="Board" name="board"/>
+        </Method>
+        <Method name="movePiece" returnType="Piece" visibility="public">
+          <Argument type="Move" name="move"/>
+        </Method>
+        <Method name="isInFirstColumn" returnType="boolean" visibility="private" isStatic="true">
+          <Argument type="int" name="currentPosition"/>
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="isInEighthColumn" returnType="boolean" visibility="private" isStatic="true">
+          <Argument type="int" name="currentPosition"/>
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="King" package="chess.project1.Pieces" visibility="public" xPosition="2305.0" yPosition="937.0">
+      <Fields>
+        <Field name="allPossibleMoves" type="int[]" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Alliance" name="alliance"/>
+          <Argument type="int" name="position"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="calculatePossibleMoves" returnType="Collection&lt;Move&gt;" visibility="public">
+          <Argument type="Board" name="board"/>
+        </Method>
+        <Method name="movePiece" returnType="Piece" visibility="public">
+          <Argument type="Move" name="move"/>
+        </Method>
+        <Method name="isInFirstColumn" returnType="boolean" visibility="private" isStatic="true">
+          <Argument type="int" name="currentPosition"/>
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="isInEighthColumn" returnType="boolean" visibility="private" isStatic="true">
+          <Argument type="int" name="currentPosition"/>
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Knight" package="chess.project1.Pieces" visibility="public" xPosition="1970.0" yPosition="656.0">
+      <Fields>
+        <Field name="allPossibleMoves" type="int[]" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Alliance" name="alliance"/>
+          <Argument type="int" name="position"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="calculatePossibleMoves" returnType="Collection&lt;Move&gt;" visibility="public">
+          <Argument type="Board" name="board"/>
+        </Method>
+        <Method name="movePiece" returnType="Piece" visibility="public">
+          <Argument type="Move" name="move"/>
+        </Method>
+        <Method name="isInFirstColumn" returnType="boolean" visibility="private" isStatic="true">
+          <Argument type="int" name="currentPosition"/>
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="isInSecondColumn" returnType="boolean" visibility="private" isStatic="true">
+          <Argument type="int" name="currentPosition"/>
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="isInSeventhColumn" returnType="boolean" visibility="private" isStatic="true">
+          <Argument type="int" name="currentPosition"/>
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="isInEighthColumn" returnType="boolean" visibility="private" isStatic="true">
+          <Argument type="int" name="currentPosition"/>
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Pawn" package="chess.project1.Pieces" visibility="public" xPosition="2351.0" yPosition="661.0">
+      <Fields>
+        <Field name="allPossibleMoves" type="int[]" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Alliance" name="alliance"/>
+          <Argument type="int" name="position"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="calculatePossibleMoves" returnType="Collection&lt;Move&gt;" visibility="public">
+          <Argument type="Board" name="board"/>
+        </Method>
+        <Method name="movePiece" returnType="Piece" visibility="public">
+          <Argument type="Move" name="move"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Piece" package="chess.project1.Pieces" visibility="public" isAbstract="true" xPosition="2129.0" yPosition="18.0">
+      <Fields>
+        <Field name="position" type="int" visibility="protected" isFinal="true"/>
+        <Field name="alliance" type="Alliance" visibility="protected" isFinal="true"/>
+        <Field name="isFirstMove" type="boolean" visibility="protected" isFinal="true"/>
+        <Field name="pieceType" type="PieceType" visibility="protected" isFinal="true"/>
+        <Field name="cashedHashCode" type="int" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="PieceType" name="pieceType"/>
+          <Argument type="int" name="position"/>
+          <Argument type="Alliance" name="alliance"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="computeHashCode" returnType="int" visibility="private"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="other"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="getPieceType" returnType="PieceType" visibility="public"/>
+        <Method name="getPiecePosition" returnType="int" visibility="public"/>
+        <Method name="getPieceAlliance" returnType="Alliance" visibility="public"/>
+        <Method name="isFirstMove" returnType="boolean" visibility="public"/>
+        <Method name="calculatePossibleMoves" returnType="Collection&lt;Move&gt;" visibility="public" isAbstract="true">
+          <Argument type="Board" name="board"/>
+        </Method>
+        <Method name="movePiece" returnType="Piece" visibility="public" isAbstract="true">
+          <Argument type="Move" name="move"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Queen" package="chess.project1.Pieces" visibility="public" xPosition="1950.0" yPosition="445.0">
+      <Fields>
+        <Field name="allPossibleMoves" type="int[]" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Alliance" name="alliance"/>
+          <Argument type="int" name="position"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="calculatePossibleMoves" returnType="Collection&lt;Move&gt;" visibility="public">
+          <Argument type="Board" name="board"/>
+        </Method>
+        <Method name="movePiece" returnType="Piece" visibility="public">
+          <Argument type="Move" name="move"/>
+        </Method>
+        <Method name="isInFirstColumn" returnType="boolean" visibility="private" isStatic="true">
+          <Argument type="int" name="currentPosition"/>
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="isInEighthColumn" returnType="boolean" visibility="private" isStatic="true">
+          <Argument type="int" name="currentPosition"/>
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Rook" package="chess.project1.Pieces" visibility="public" xPosition="2322.0" yPosition="445.0">
+      <Fields>
+        <Field name="allPossibleMoves" type="int[]" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Alliance" name="alliance"/>
+          <Argument type="int" name="position"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="calculatePossibleMoves" returnType="Collection&lt;Move&gt;" visibility="public">
+          <Argument type="Board" name="board"/>
+        </Method>
+        <Method name="movePiece" returnType="Piece" visibility="public">
+          <Argument type="Move" name="move"/>
+        </Method>
+        <Method name="isInFirstColumn" returnType="boolean" visibility="private" isStatic="true">
+          <Argument type="int" name="currentPosition"/>
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="isInEighthColumn" returnType="boolean" visibility="private" isStatic="true">
+          <Argument type="int" name="currentPosition"/>
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="BlackPlayer" package="chess.project1.Player" visibility="public" xPosition="76.0" yPosition="1003.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Board" name="board"/>
+          <Argument type="Collection&lt;Move&gt;" name="whiteStandardLegalMoves"/>
+          <Argument type="Collection&lt;Move&gt;" name="blackStandardLegalMoves"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getActivePieces" returnType="Collection&lt;Piece&gt;" visibility="public"/>
+        <Method name="getAlliance" returnType="Alliance" visibility="public"/>
+        <Method name="getOpponent" returnType="Player" visibility="public"/>
+        <Method name="calculateKingCastles" returnType="Collection&lt;Move&gt;" visibility="public">
+          <Argument type="Collection&lt;Move&gt;" name="playerlegals"/>
+          <Argument type="Collection&lt;Move&gt;" name="opponentsLegals"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MoveTransition" package="chess.project1.Player" visibility="public" xPosition="1049.0" yPosition="732.0">
+      <Fields>
+        <Field name="transitionBoard" type="Board" visibility="private" isFinal="true"/>
+        <Field name="move" type="Move" visibility="private" isFinal="true"/>
+        <Field name="moveStatus" type="MoveStatus" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Board" name="transitionBoard"/>
+          <Argument type="Move" name="move"/>
+          <Argument type="MoveStatus" name="moveStatus"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getMoveStatus" returnType="MoveStatus" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Player" package="chess.project1.Player" visibility="public" isAbstract="true" xPosition="89.0" yPosition="245.0">
+      <Fields>
+        <Field name="board" type="Board" visibility="protected" isFinal="true"/>
+        <Field name="playerKing" type="King" visibility="protected" isFinal="true"/>
+        <Field name="legalMoves" type="Collection&lt;Move&gt;" visibility="protected" isFinal="true"/>
+        <Field name="isInCheck" type="boolean" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Board" name="board"/>
+          <Argument type="Collection&lt;Move&gt;" name="legalMoves"/>
+          <Argument type="Collection&lt;Move&gt;" name="opponentMoves"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getPlayerKing" returnType="King" visibility="public"/>
+        <Method name="getLegalMoves" returnType="Collection&lt;Move&gt;" visibility="public"/>
+        <Method name="calculateAttackOnTile" returnType="Collection&lt;Move&gt;" visibility="protected" isStatic="true">
+          <Argument type="int" name="piecePosition"/>
+          <Argument type="Collection&lt;Move&gt;" name="moves"/>
+        </Method>
+        <Method name="King" returnType="King" visibility="private"/>
+        <Method name="getActivePieces" returnType="Collection&lt;Piece&gt;" visibility="public" isAbstract="true"/>
+        <Method name="getAlliance" returnType="Alliance" visibility="public" isAbstract="true"/>
+        <Method name="getOpponent" returnType="Player" visibility="public" isAbstract="true"/>
+        <Method name="calculateKingCastles" returnType="Collection&lt;Move&gt;" visibility="public" isAbstract="true">
+          <Argument type="Collection&lt;Move&gt;" name="playerlegals"/>
+          <Argument type="Collection&lt;Move&gt;" name="opponentsLegals"/>
+        </Method>
+        <Method name="isMoveLegal" returnType="boolean" visibility="public">
+          <Argument type="Move" name="move"/>
+        </Method>
+        <Method name="check" returnType="boolean" visibility="public"/>
+        <Method name="checkMate" returnType="boolean" visibility="public"/>
+        <Method name="hasEscapeMoves" returnType="boolean" visibility="protected"/>
+        <Method name="staleMate" returnType="boolean" visibility="public"/>
+        <Method name="castle" returnType="boolean" visibility="public"/>
+        <Method name="makeMove" returnType="MoveTransition" visibility="public">
+          <Argument type="Move" name="move"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="WhitePlayer" package="chess.project1.Player" visibility="public" xPosition="75.0" yPosition="803.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Board" name="board"/>
+          <Argument type="Collection&lt;Move&gt;" name="whiteStandardLegalMoves"/>
+          <Argument type="Collection&lt;Move&gt;" name="blackStandardLegalMoves"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getActivePieces" returnType="Collection&lt;Piece&gt;" visibility="public"/>
+        <Method name="getAlliance" returnType="Alliance" visibility="public"/>
+        <Method name="getOpponent" returnType="Player" visibility="public"/>
+        <Method name="calculateKingCastles" returnType="Collection&lt;Move&gt;" visibility="public">
+          <Argument type="Collection&lt;Move&gt;" name="playerlegals"/>
+          <Argument type="Collection&lt;Move&gt;" name="opponentsLegals"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Utilization" package="chess.project1" visibility="public" xPosition="841.0" yPosition="918.0">
+      <Fields>
+        <Field name="firstColumn" type="boolean[]" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="secondColumn" type="boolean[]" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="seventhColumn" type="boolean[]" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="eighthColumn" type="boolean[]" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="secondRow" type="boolean[]" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="seventhRow" type="boolean[]" visibility="public" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="isValidTileCoordinate" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="int" name="Coordinate"/>
+        </Method>
+        <Method name="row" returnType="boolean[]" visibility="private" isStatic="true">
+          <Argument type="int" name="rowNumber"/>
+        </Method>
+        <Method name="column" returnType="boolean[]" visibility="private" isStatic="true">
+          <Argument type="int" name="columnNumber"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Enum name="Alliance" package="chess.project1" visibility="public" xPosition="255.0" yPosition="18.0">
+      <Literals>
+        <Literal name="WHITE"/>
+        <Literal name="BLACK"/>
+      </Literals>
+    </Enum>
+    <Enum name="MoveStatus" package="chess.project1.Player" visibility="public" xPosition="1258.0" yPosition="991.0">
+      <Literals>
+        <Literal name="DONE"/>
+        <Literal name="ILLEGAL_MOVE"/>
+        <Literal name="LEAVES_PLAYER_IN_CHECK"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="chess.project1.Board.Board" target="chess.project1.Board.Board" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="moveStatus" source="chess.project1.Player.MoveTransition" target="chess.project1.Player.MoveStatus" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Pieces.Piece" target="chess.project1.Alliance" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Pieces.Queen" target="chess.project1.Board.Move" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Pieces.Pawn" target="chess.project1.Board.Move" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Pieces.Pawn" target="chess.project1.Pieces.Piece" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Player.Player" target="chess.project1.Board.Move" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Pieces.King" target="chess.project1.Pieces.Piece" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="chess.project1.Pieces.Queen" target="chess.project1.Pieces.Piece"/>
+    <UseRelation source="chess.project1.Player.WhitePlayer" target="chess.project1.Pieces.Piece" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Pieces.Knight" target="chess.project1.Pieces.Piece" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Board.Board" target="chess.project1.Pieces.Piece" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Pieces.Piece" target="chess.project1.Pieces.Piece" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="whitePlayer" source="chess.project1.Board.Board" target="chess.project1.Player.WhitePlayer" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Pieces.Knight" target="chess.project1.Board.Move" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="chess.project1.Player.WhitePlayer" target="chess.project1.Player.Player"/>
+    <UseRelation source="chess.project1.Pieces.Piece" target="chess.project1.Board.Move" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Player.Player" target="chess.project1.Pieces.King" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="chess.project1.Pieces.Rook" target="chess.project1.Pieces.Piece"/>
+    <UseRelation source="chess.project1.Pieces.Rook" target="chess.project1.Board.Move" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Player.Player" target="chess.project1.Alliance" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Player.Player" target="chess.project1.Pieces.Piece" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="board" source="chess.project1.Player.Player" target="chess.project1.Board.Board" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="chess.project1.Pieces.Knight" target="chess.project1.Pieces.Piece"/>
+    <UseRelation source="chess.project1.Board.Board" target="chess.project1.Board.Tile" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="chess.project1.Pieces.King" target="chess.project1.Pieces.Piece"/>
+    <HasRelation name="gameBoard" source="chess.project1.Board.Board" target="chess.project1.Board.Tile" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Tile&gt;"/>
+    <HasRelation name="whitePieces" source="chess.project1.Board.Board" target="chess.project1.Pieces.Piece" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="board" source="chess.project1.ChessProject1" target="chess.project1.Board.Board" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Player.BlackPlayer" target="chess.project1.Board.Move" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Player.MoveTransition" target="chess.project1.Player.MoveStatus" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Player.WhitePlayer" target="chess.project1.Alliance" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="chess.project1.Pieces.Bishop" target="chess.project1.Pieces.Piece"/>
+    <HasRelation name="blackPieces" source="chess.project1.Board.Board" target="chess.project1.Pieces.Piece" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Player.BlackPlayer" target="chess.project1.Pieces.Piece" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Board.Tile" target="chess.project1.Board.Tile" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Player.Player" target="chess.project1.Player.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Player.WhitePlayer" target="chess.project1.Player.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Player.Player" target="chess.project1.Player.MoveTransition" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Board.Move" target="chess.project1.Board.Board" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Player.BlackPlayer" target="chess.project1.Alliance" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="currentPlayer" source="chess.project1.Board.Board" target="chess.project1.Player.Player" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="move" source="chess.project1.Player.MoveTransition" target="chess.project1.Board.Move" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="blackPlayer" source="chess.project1.Board.Board" target="chess.project1.Player.BlackPlayer" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Pieces.Rook" target="chess.project1.Pieces.Piece" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="movingPiece" source="chess.project1.Board.Move" target="chess.project1.Pieces.Piece" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Player.BlackPlayer" target="chess.project1.Player.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Player.WhitePlayer" target="chess.project1.Board.Move" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="alliance" source="chess.project1.Pieces.Piece" target="chess.project1.Alliance" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Pieces.Bishop" target="chess.project1.Board.Move" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Pieces.Bishop" target="chess.project1.Pieces.Piece" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="legalMoves" source="chess.project1.Player.Player" target="chess.project1.Board.Move" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Pieces.King" target="chess.project1.Board.Move" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="transitionBoard" source="chess.project1.Player.MoveTransition" target="chess.project1.Board.Board" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Board.Move" target="chess.project1.Pieces.Piece" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Board.Tile" target="chess.project1.Pieces.Piece" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="chess.project1.Pieces.Pawn" target="chess.project1.Pieces.Piece"/>
+    <UseRelation source="chess.project1.Pieces.Queen" target="chess.project1.Pieces.Piece" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="chess.project1.Board.Board" target="chess.project1.Player.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="board" source="chess.project1.Board.Move" target="chess.project1.Board.Board" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="playerKing" source="chess.project1.Player.Player" target="chess.project1.Pieces.King" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="chess.project1.Player.BlackPlayer" target="chess.project1.Player.Player"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
